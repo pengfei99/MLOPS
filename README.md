@@ -18,3 +18,5 @@ and business metrics.
 
 
 MLOps is practiced between Data Scientists, DevOps, and Machine Learning engineers  
+
+![ML_Ops_Venn_Diagram.svg](img/ML_Ops_Venn_Diagram.svg)
