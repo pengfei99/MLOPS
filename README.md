@@ -160,3 +160,19 @@ MLOps is an ML engineering culture that includes the following practices:
 - **Continuous Delivery (CD)** concerns with delivery of an ML training pipeline that automatically deploys another the ML model prediction service.
 - **Continuous Training (CT)** is unique to ML systems property, which automatically retrains ML models for re-deployment.
 - **Continuous Monitoring (CM)** concerns with monitoring production data and model performance metrics, which are bound to business metrics.
+
+## 5. MLOps platform
+
+An MLOps platform provides data scientists and software engineers with a collaborative environment that facilitates 
+iterative data exploration, real-time co-working capabilities for experiment tracking, feature engineering, and 
+model management, as well as controlled model transitioning, deployment, and monitoring. An MLOps automates the 
+operational and synchronization aspects of the machine learning lifecycle.
+
+For example, mlflow can be considered as a mlops platform
+
+![mlflow_for_mlops.png](img/mlflow_for_mlops.png)
+
+## Related sources
+
+- [MLOps project example](https://github.com/pengfei99/mlflow-pokemon-example.git) 
+- [Feature engineering/store] (https://github.com/pengfei99/FeatureEngineering.git)
