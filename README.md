@@ -103,18 +103,45 @@ following MLOps principals:
 - Model Governance : manage model versions, model artifacts and transitions through their lifecycle (e.g. staging, production, archived,etc.).
                      
 - Model deployment: Automate the process of deploying registered models (e.g. permissions, cluster creation, API management, etc.)
-- Model monitoring: Monitor the state of model production server (e.g. number of request, response time, serving data, etc.)
+- Model monitoring: Monitor the state of model production server (e.g. number of request, response time, serving data anomalies, etc.)
 - Model retraining: Create alerts and automation to take corrective action in case of **model drift** due to 
                     differences in training and inference data or `data evolution`.
 
 ## 3. Different level of MLOps maturity
 
 Google defines three levels of maturity of the ML process:
-- Level 0 (Manual process): This is a typical data science process, which is performed at the beginning of 
-                           implementing ML. This level has an experimental and iterative nature. Every step in each 
-                           pipeline, such as data preparation and validation, model training and testing, are executed 
-                           manually. The common way to process is to use Rapid Application Development (RAD) tools, 
-                           such as Jupyter Notebooks.
+- Level 0 : Manual process
+- Level 1 : 
+
+### 3.1 Manual process (Level 0 maturity)
+
+This is a typical data science process, which is performed at the beginning of 
+implementing ML. This level has an experimental and iterative nature. Every step in each 
+pipeline, such as data preparation and validation, model training and testing, are executed 
+manually. The common way to process is to use Rapid Application Development (RAD) tools, 
+such as Jupyter Notebooks.
+
+Below figure shows the main steps:
+![mlops_level_0_manual.svg](img/mlops_level_0_manual.svg)
+
+### 3.2 ML pipeline automation (Level 1 maturity)
+
+The goal of level 1 is to perform `continuous training` of the model by automating the ML pipeline; this lets you 
+achieve `continuous delivery` of model prediction service.
+
+To automate the process of using new data to retrain models in production, you need to introduce 
+**automated data and model validation** steps to the pipeline, as well as pipeline triggers and metadata management.
+
+![mlops_level_1_ml-automation.svg](img/mlops_level_1_ml-automation.svg)
+### 3.3 CI/CD pipeline automation (Level 2 maturity)
+
+In this level, we introduce a CI/CD system to perform fast and reliable ML model deployments in production. This 
+automated CI/CD system lets your data scientists rapidly explore new ideas around feature engineering, model 
+architecture, and hyper-parameters. They can implement these ideas and automatically build, test, and deploy the 
+new pipeline components to the target environment.
+
+![mlops_level_2_ml-automation.svg](img/mlops_level_2_ml-automation.svg)
+
 
 For more information, you can visit this [page](https://cloud.google.com/architecture/mlops-continuous-delivery-and-automation-pipelines-in-machine-learning)
 
