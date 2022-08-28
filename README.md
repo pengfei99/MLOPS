@@ -98,8 +98,23 @@ The primary goal in this phase is to deliver a stable quality ML model that we w
 The third phase is devoted to deliver the previously developed ML model into production. Here, we need to address 
 following MLOps principals:
 - Model tracking: track all the necessary element to reproduce the model such as code, hyperparameter and training data.
-- Model Governance : manage model versions, model artifacts and transitions through their lifecycle (e.g. ). Discover, share, and collaborate across ML models with the help of an open source MLOps platform such as MLflow.
-- Model inference and serving
-- Model monitoring
-- Automated model retraining
+- Model review: Test model and produce quality assurance report. Inference model production-specifics properties such as 
+                model response times.
+- Model Governance : manage model versions, model artifacts and transitions through their lifecycle (e.g. staging, production, archived,etc.).
+                     
+- Model deployment: Automate the process of deploying registered models (e.g. permissions, cluster creation, API management, etc.)
+- Model monitoring: Monitor the state of model production server (e.g. number of request, response time, serving data, etc.)
+- Model retraining: Create alerts and automation to take corrective action in case of **model drift** due to 
+                    differences in training and inference data or `data evolution`.
+
+## 3. Different level of MLOps maturity
+
+Google defines three levels of maturity of the ML process:
+- Level 0 (Manual process): This is a typical data science process, which is performed at the beginning of 
+                           implementing ML. This level has an experimental and iterative nature. Every step in each 
+                           pipeline, such as data preparation and validation, model training and testing, are executed 
+                           manually. The common way to process is to use Rapid Application Development (RAD) tools, 
+                           such as Jupyter Notebooks.
+
+For more information, you can visit this [page](https://cloud.google.com/architecture/mlops-continuous-delivery-and-automation-pipelines-in-machine-learning)
 
