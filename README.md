@@ -168,11 +168,11 @@ iterative data exploration, real-time co-working capabilities for experiment tra
 model management, as well as controlled model transitioning, deployment, and monitoring. An MLOps automates the 
 operational and synchronization aspects of the machine learning lifecycle.
 
-For example, mlflow can be considered as a mlops platform
+For example, [mlflow](https://mlflow.org/) can be considered as a mlops platform
 
 ![mlflow_for_mlops.png](img/mlflow_for_mlops.png)
 
 ## Related sources
 
 - [MLOps project example](https://github.com/pengfei99/mlflow-pokemon-example.git) 
-- [Feature engineering/store] (https://github.com/pengfei99/FeatureEngineering.git)
+- [Feature engineering/store](https://github.com/pengfei99/FeatureEngineering.git)
