@@ -1,0 +1,15 @@
+name: pokemon-legendary-estimator
+
+conda_env: conda.yaml
+
+entry_points:
+  main:
+    parameters:
+      remote_server_uri: {type: str, default: http://pengfei.org:8000}
+      experiment_name: {type: str, default: test-1}
+      run_name: {type: str, default: default}
+      data_url: {type: str, default: https://minio.lab.sspcloud.fr/pengfei/sspcloud-demo/pokemon-cleaned.csv}
+      n_estimator: {type: int, default: 10}
+      max_depth: {type: int, default: 5}
+      min_samples_split: {type: int, default: 2}
+    command: "python train_model.py {experiment_name} {run_name} {data_url} {n_estimator} {max_depth} {min_samples_split}"
