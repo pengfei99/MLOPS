@@ -6,6 +6,9 @@ authors = ["Pengfei Liu <liu.pengfei@hotmail.fr>"]
 
 [tool.poetry.dependencies]
 python = "^3.8"
+mlflow = "^1.28.0"
+scikit-learn = "^1.1.2"
+jupyter = "^1.0.0"
 
 [tool.poetry.dev-dependencies]
 
