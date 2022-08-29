@@ -4,11 +4,11 @@ export MLFLOW_TRACKING_URI='https://user-pengfei-866801.kub.sspcloud.fr/'
 export MLFLOW_EXPERIMENT_NAME="pokemon"
 
 run_name="default"
-data_url = "https://minio.lab.sspcloud.fr/pengfei/sspcloud-demo/pokemon-cleaned.csv"
+data_url="https://minio.lab.sspcloud.fr/pengfei/sspcloud-demo/pokemon-cleaned.csv"
 
 # set the hyper parameters
-n_estimator = 50
-max_depth = 30
-min_samples_split = 2
+n_estimator="50"
+max_depth="30"
+min_samples_split="2"
 
 python ../train_model.py ${MLFLOW_EXPERIMENT_NAME} ${run_name} ${data_url} ${n_estimator} ${max_depth} ${min_samples_split}
