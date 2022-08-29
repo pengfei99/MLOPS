@@ -11,6 +11,6 @@ n_estimator="50"
 max_depth="30"
 min_samples_split="2"
 
-mlflow run https://github.com/pengfei99/mlflow-pokemon-example.git -P remote_server_uri=$MLFLOW_TRACKING_URI -P experiment_name=$MLFLOW_EXPERIMENT_NAME \
--P data_url=https://minio.lab.sspcloud.fr/pengfei/mlflow-demo/pokemon-partial.csv \
--P n_estimator=50 -P max_depth=30 -P min_samples_split=2
+root_path="/home/jovyan/work/MLOPS"
+
+python ${root_path}/tutorials/pokemon/train_model.py ${MLFLOW_EXPERIMENT_NAME} ${run_name} ${data_url} ${n_estimator} ${max_depth} ${min_samples_split}
