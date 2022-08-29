@@ -11,4 +11,6 @@ n_estimator="50"
 max_depth="30"
 min_samples_split="2"
 
-python ../train_model.py ${MLFLOW_EXPERIMENT_NAME} ${run_name} ${data_url} ${n_estimator} ${max_depth} ${min_samples_split}
+root_path="/home/jovyan/work/MLOPS"
+
+python ${root_path}/tutorials/pokemon/train_model.py ${MLFLOW_EXPERIMENT_NAME} ${run_name} ${data_url} ${n_estimator} ${max_depth} ${min_samples_split}
