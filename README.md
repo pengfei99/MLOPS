@@ -39,6 +39,8 @@ Below figure shows the mlops competence requirement:
 
 ![ML_Ops_Venn_Diagram.svg](img/ML_Ops_Venn_Diagram.svg)
 
+![ml_technical_debt.PNG](img/ml_technical_debt.PNG)
+
 These components require the collaboration and hand-offs across teams, from Data Engineering to Data Science to ML Engineering. 
 Naturally, it requires stringent operational rigor to keep all these processes synchronous and working in tandem. 
 MLOps encompasses the experimentation, iteration, and continuous improvement of the machine learning lifecycle. 
@@ -96,23 +98,24 @@ The primary goal in this phase is to deliver a stable quality ML model that we w
 
 ### 2.3 ML Operations
 
-The third phase is devoted to deliver the previously developed ML model into production. Here, we need to address 
+The third phase is devoted to deliver the previously developed ML model into production. Here, we need to address the
 following MLOps principals:
-- Model tracking: track all the necessary element to reproduce the model such as code, hyperparameter and training data.
-- Model review: Test model and produce quality assurance report. Inference model production-specifics properties such as 
+- **Model tracking**: track all the necessary element to reproduce the model such as code, hyperparameter and training data.
+- **Model review**: Test model and produce quality assurance report. Inference model production-specifics properties such as 
                 model response times.
-- Model Governance : manage model versions, model artifacts and transitions through their lifecycle (e.g. staging, production, archived,etc.).
+- **Model Governance** : manage model versions, model artifacts and transitions through their lifecycle (e.g. staging, production, archived,etc.).
                      
-- Model deployment: Automate the process of deploying registered models (e.g. permissions, cluster creation, API management, etc.)
-- Model monitoring: Monitor the state of model production server (e.g. number of request, response time, serving data anomalies, etc.)
-- Model retraining: Create alerts and automation to take corrective action in case of **model drift** due to 
+- **Model deployment**: Automate the process of deploying registered models (e.g. permissions, cluster creation, API management, etc.)
+- **Model monitoring**: Monitor the state of model production server (e.g. number of request, response time, serving data anomalies, etc.)
+- **Model retraining**: Create alerts and automation to take corrective action in case of **model drift** due to 
                     differences in training and inference data or `data evolution`.
 
 ## 3. Different level of MLOps maturity
 
 Google defines three levels of maturity of the ML process:
 - Level 0 : Manual process
-- Level 1 : 
+- Level 1 : ML pipeline automation
+- Level 2 : CI/CD pipeline automation
 
 ### 3.1 Manual process (Level 0 maturity)
 
