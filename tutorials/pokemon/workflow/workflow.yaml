@@ -1,0 +1,114 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Workflow
+metadata:
+  name: pokemon-model-training-workflow-v1
+spec:
+  entrypoint: main
+
+  arguments:
+    parameters:
+      - name: aws-access-id
+        value: ""
+      - name: aws-secret-key
+        value: "changeMe"
+      - name: aws-session-token
+        value: ""
+      - name: aws-default-region
+        value: "us-east-1"
+      - name: aws-s3-endpoint
+        value: "minio.lab.sspcloud.fr"
+       # The mlflow tracking server is responsable to log the hyper-parameter and model metrics,
+       # You can create it inside the datalab, and copy the url. Below is an example
+       # https://pengfei-mlflow-7841853311341079041-mlflow-ihm.kub.sspcloud.fr/
+      - name: mlflow-tracking-uri
+        value: 'https://user-pengfei-531016.kub.sspcloud.fr/'
+      - name: mlflow-experiment-name
+        value: "pokemon"
+      - name: mlflow-s3-url
+        value: "https://minio.lab.sspcloud.fr"
+      - name: code-source-repo
+        value: "https://github.com/pengfei99/mlflow-pokemon-example.git"
+      - name: model-training-conf-list
+        value: |
+          [
+            { "data": "https://minio.lab.sspcloud.fr/pengfei/mlflow-demo/pokemon-partial.csv", "nestimator": 90, "maxDepth": 30,"minSamplesSplit": 2},
+            { "data": "https://minio.lab.sspcloud.fr/pengfei/mlflow-demo/pokemon-partial.csv", "nestimator": 70, "maxDepth": 30,"minSamplesSplit": 2},
+            { "data": "https://minio.lab.sspcloud.fr/pengfei/mlflow-demo/pokemon-new.csv", "nestimator": 50, "maxDepth": 30,"minSamplesSplit": 2},
+            { "data": "https://minio.lab.sspcloud.fr/pengfei/mlflow-demo/pokemon-new.csv", "nestimator": 70, "maxDepth": 30,"minSamplesSplit": 2},
+            { "data": "https://minio.lab.sspcloud.fr/pengfei/mlflow-demo/pokemon-cleaned.csv", "nestimator": 50, "maxDepth": 30,"minSamplesSplit": 2},
+            { "data": "https://minio.lab.sspcloud.fr/pengfei/mlflow-demo/pokemon-cleaned.csv", "nestimator": 70, "maxDepth": 30,"minSamplesSplit": 2} 
+          ]
+ 
+
+  templates:
+    #############################################################################################
+    #################### main template for planning dag of the pipeline #########################
+    #############################################################################################
+    - name: main
+      dag:
+        tasks:
+          # task 0: start pipeline
+          - name: start-pipeline
+            template: start-pipeline-wt
+          # task 1: train model with given params
+          - name: train-model-with-given-params
+            dependencies: [ start-pipeline ]
+            template: run-model-training-wt
+            arguments:
+              parameters:
+                - name: data
+                  value: "{{item.data}}"
+                - name: nestimator
+                  value: "{{item.nestimator}}"
+                - name: maxDepth
+                  value: "{{item.maxDepth}}"
+                - name: minSamplesSplit
+                  value: "{{item.minSamplesSplit}}"
+
+              # pass the inputs to the step "withParam"
+            withParam: "{{workflow.parameters.model-training-conf-list}}"
+    ####################################################################################################################
+    #################### task template for implementing the logic of each task of the pipeline #########################
+    ####################################################################################################################
+    # worker template for task-0 start-pipeline
+    - name: start-pipeline-wt
+      inputs:
+      container:
+        image: busybox
+        command: [ sh, -c ]
+        args: [ "echo start pipeline" ]
+
+    # worker template for task-1 train model
+    - name: run-model-training-wt
+      inputs:
+        parameters:
+          - name: data
+          - name: nestimator
+          - name: maxDepth
+          - name: minSamplesSplit
+      container:
+        image: liupengfei99/mlflow:latest
+        command: [sh, -c]
+        args: ["mlflow run $CODE_SOURCE_URI -P remote_server_uri=$MLFLOW_TRACKING_URI -P experiment_name=$MLFLOW_EXPERIMENT_NAME
+                -P data_url={{inputs.parameters.data}} -P n_estimator={{inputs.parameters.nestimator}}
+                -P max_depth={{inputs.parameters.maxDepth}} -P min_samples_split={{inputs.parameters.minSamplesSplit}}"]
+        env:
+          - name: AWS_SECRET_ACCESS_KEY
+            value: "{{workflow.parameters.aws-secret-key}}"
+          - name: AWS_DEFAULT_REGION
+            value: "{{workflow.parameters.aws-default-region}}"
+          - name: AWS_S3_ENDPOINT
+            value: "{{workflow.parameters.aws-s3-endpoint}}"
+          - name: AWS_SESSION_TOKEN
+            value: "{{workflow.parameters.aws-session-token}}"
+          - name: AWS_ACCESS_KEY_ID
+            value: "{{workflow.parameters.aws-access-id}}"
+          - name: MLFLOW_TRACKING_URI
+            value: "{{workflow.parameters.mlflow-tracking-uri}}"
+          - name: MLFLOW_EXPERIMENT_NAME
+            value: "{{workflow.parameters.mlflow-experiment-name}}"
+          - name: MLFLOW_S3_ENDPOINT_URL
+            value: "{{workflow.parameters.mlflow-s3-url}}"
+          - name: CODE_SOURCE_URI
+            value: "{{workflow.parameters.code-source-repo}}"
+
