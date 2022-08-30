@@ -1,6 +1,6 @@
 name: pokemon-legendary-estimator
 
-conda_env: conda.yaml
+conda_env: tutorials/pokemon/conda.yaml
 
 entry_points:
   main:
