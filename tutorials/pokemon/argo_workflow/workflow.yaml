@@ -8,14 +8,17 @@ metadata:
 spec:
   serviceAccountName: workflow   # the account that allows argo work to launch pods on k8s
   entrypoint: main
+  #############################################################################################
+  #################### Part 1. Workflow configuration            ##############################
+  #############################################################################################
   arguments:
     parameters:
       - name: aws-access-id
-        value: ""
+        value: "changeMe"
       - name: aws-secret-key
         value: "changeMe"
       - name: aws-session-token
-        value: ""
+        value: "changeMe"
       - name: aws-default-region
         value: "us-east-1"
       - name: aws-s3-endpoint
@@ -24,13 +27,13 @@ spec:
        # You can create it inside the datalab, and copy the url. Below is an example
        # https://pengfei-mlflow-7841853311341079041-mlflow-ihm.kub.sspcloud.fr/
       - name: mlflow-tracking-uri
-        value: 'https://user-pengfei-531016.kub.sspcloud.fr/'
+        value: 'changeMe'
       - name: mlflow-experiment-name
         value: "pokemon"
       - name: mlflow-s3-url
         value: "https://minio.lab.sspcloud.fr"
       - name: code-source-repo
-        value: "https://github.com/pengfei99/mlflow-pokemon-example.git"
+        value: "https://github.com/pengfei99/MLOPS.git"
       - name: model-training-conf-list
         value: |
           [
@@ -45,7 +48,7 @@ spec:
 
   templates:
     #############################################################################################
-    #################### main template for planning dag of the pipeline #########################
+    #################### Part 2. main workflow for planning dag  ##############################
     #############################################################################################
     - name: main
       dag:
@@ -71,7 +74,7 @@ spec:
               # pass the inputs to the step "withParam"
             withParam: "{{workflow.parameters.model-training-conf-list}}"
     ####################################################################################################################
-    #################### task template for implementing the logic of each task of the pipeline #########################
+    #################### Part 3: task template for implementing the logic of each task  #########################
     ####################################################################################################################
     # worker template for task-0 start-pipeline
     - name: start-pipeline-wt
