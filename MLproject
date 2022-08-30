@@ -12,4 +12,4 @@ entry_points:
       n_estimator: {type: int, default: 10}
       max_depth: {type: int, default: 5}
       min_samples_split: {type: int, default: 2}
-    command: "python train_model.py {experiment_name} {run_name} {data_url} {n_estimator} {max_depth} {min_samples_split}"
+    command: "python tutorials/pokemon/train_model.py {experiment_name} {run_name} {data_url} {n_estimator} {max_depth} {min_samples_split}"
