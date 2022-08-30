@@ -2,6 +2,9 @@ apiVersion: argoproj.io/v1alpha1
 kind: Workflow
 metadata:
   name: pokemon-model-training-workflow-v1
+  labels:
+    environment: production
+    app: pokemon
 spec:
   serviceAccountName: workflow   # the account that allows argo work to launch pods on k8s
   entrypoint: main
@@ -89,7 +92,7 @@ spec:
       container:
         image: liupengfei99/mlflow:latest
         command: [sh, -c]
-        args: ["mlflow run $CODE_SOURCE_URI -P remote_server_uri=$MLFLOW_TRACKING_URI -P experiment_name=$MLFLOW_EXPERIMENT_NAME
+        args: ["mlflow run $CODE_SOURCE_URI --version main -P remote_server_uri=$MLFLOW_TRACKING_URI -P experiment_name=$MLFLOW_EXPERIMENT_NAME
                 -P data_url={{inputs.parameters.data}} -P n_estimator={{inputs.parameters.nestimator}}
                 -P max_depth={{inputs.parameters.maxDepth}} -P min_samples_split={{inputs.parameters.minSamplesSplit}}"]
         env:
