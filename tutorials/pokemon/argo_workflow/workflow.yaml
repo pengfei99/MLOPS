@@ -3,8 +3,8 @@ kind: Workflow
 metadata:
   name: pokemon-model-training-workflow-v1
 spec:
+  serviceAccountName: workflow   # the account that allows argo work to launch pods on k8s
   entrypoint: main
-
   arguments:
     parameters:
       - name: aws-access-id
