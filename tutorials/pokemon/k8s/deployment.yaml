@@ -1,0 +1,47 @@
+# Creating MLflow deployment
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pokemon-model-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: pokemon-model-deployment
+  template:
+    metadata:
+      labels:
+        app: pokemon-model-deployment
+    spec:
+      containers:
+        - name: pokemon-model-api
+          image: liupengfei99/pokemon-api:latest
+          imagePullPolicy: Always
+          env:
+            # env var for s3 connexion
+            - name: MLFLOW_S3_ENDPOINT_URL
+              value: https://minio.lab.sspcloud.fr
+            - name: AWS_ACCESS_KEY_ID
+              valueFrom:
+                secretKeyRef:
+                  name: my-s3-creds.yaml
+                  key: accessKey
+            - name: AWS_SECRET_ACCESS_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: my-s3-creds.yaml
+                  key: secretKey
+            - name: AWS_DEFAULT_REGION
+              value: us-east-1
+            # env var for setting mlflow model registry server
+            - name: MLFLOW_TRACKING_URI
+              value: https://user-pengfei-56125.kub.sspcloud.fr/
+            # env var for setting models uri which will be deployed
+            - name: MLFLOW_MODEL_NAME
+              value: pokemon
+            - name: MLFLOW_MODEL_VERSION
+              value: "3"
+          ports:
+            - name: http
+              containerPort: 8000
+              protocol: TCP

@@ -1,0 +1,19 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: pokemon-model-ingress
+spec:
+  tls:
+    - hosts:
+        - pokemon-api.lab.sspcloud.fr
+  rules:
+    - host: pokemon-api.lab.sspcloud.fr
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: pokemon-model-service
+                port:
+                  number: 80
