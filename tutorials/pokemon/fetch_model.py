@@ -19,18 +19,17 @@ def prepare_sample_data(data_url):
 
 
 # fetch the trained model from mlflow server by using its version
-def fetch_model(server_uri: str, experiment_name: str, model_version: str):
-    os.environ["MLFLOW_TRACKING_URI"] = server_uri
+def fetch_model(experiment_name: str, model_version: str):
     model = mlflow.pyfunc.load_model(model_uri=f"models:/{experiment_name}/{model_version}")
     return model
 
 
-def test_model(data_url: str, server_uri: str, experiment_name: str, model_version: str):
+def test_model(data_url: str, experiment_name: str, model_version: str):
     # step1: prepare sample data
     legendary_sample, normal_sample = prepare_sample_data(data_url)
 
     # step2: fetch the model
-    model = fetch_model(server_uri, experiment_name, model_version)
+    model = fetch_model(experiment_name, model_version)
 
     # step3: predict the sample data
     print(model.predict(legendary_sample))
@@ -39,11 +38,10 @@ def test_model(data_url: str, server_uri: str, experiment_name: str, model_versi
 
 def main():
     data_url = "https://minio.lab.sspcloud.fr/pengfei/sspcloud-demo/pokemon-cleaned.csv"
-    mlflow_server_uri = "https://user-pengfei-42041.kub.sspcloud.fr/"
     experiment_name = "pokemon"
     version = '4'
 
-    test_model(data_url, mlflow_server_uri, experiment_name, version)
+    test_model(data_url, experiment_name, version)
 
 
 if __name__ == "__main__":
