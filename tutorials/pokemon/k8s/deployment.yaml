@@ -24,12 +24,12 @@ spec:
             - name: AWS_ACCESS_KEY_ID
               valueFrom:
                 secretKeyRef:
-                  name: my-s3-creds.yaml
+                  name: my-s3-creds
                   key: accessKey
             - name: AWS_SECRET_ACCESS_KEY
               valueFrom:
                 secretKeyRef:
-                  name: my-s3-creds.yaml
+                  name: my-s3-creds
                   key: secretKey
             - name: AWS_DEFAULT_REGION
               value: us-east-1
