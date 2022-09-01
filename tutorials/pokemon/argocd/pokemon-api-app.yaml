@@ -1,0 +1,16 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: pokemon-api
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/pengfei99/MLOPS.git
+    targetRevision: HEAD
+    path: tutorials/pokemon/k8s
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: user-pengfei
+  syncPolicy:
+    automated:
+      selfHeal: true
