@@ -15,6 +15,8 @@ def prepare_sample_data(data_url):
     normal_pokemon = input_df[input_df["legendary"] == False]
     normal_pokemon_sample = normal_pokemon.sample(5).drop(['legendary', 'generation', 'total'], axis=1).select_dtypes(
         exclude=['object'])
+    print(f"legendary pokemon samples:\n {legendary_pokemon_sample}")
+    print(f"normal pokemon samples:\n {normal_pokemon_sample}")
     return legendary_pokemon_sample, normal_pokemon_sample
 
 
