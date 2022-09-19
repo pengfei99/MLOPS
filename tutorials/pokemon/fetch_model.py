@@ -32,15 +32,17 @@ def test_model(data_url: str, experiment_name: str, model_version: str):
     model = fetch_model(experiment_name, model_version)
 
     # step3: predict the sample data
-    print(model.predict(legendary_sample))
-    print(model.predict(normal_sample))
+    print(f"The prediction of 5 five legendary pokemon: {model.predict(legendary_sample)}")
+    print(f"The prediction of 5 five normal pokemon: {model.predict(normal_sample)}")
 
 
 def main():
     data_url = "https://minio.lab.sspcloud.fr/pengfei/sspcloud-demo/pokemon-cleaned.csv"
+    # setup experiment name      
     experiment_name = "pokemon"
+    # setup model version      
     version = '4'
-
+    # test model with test data      
     test_model(data_url, experiment_name, version)
 
 
