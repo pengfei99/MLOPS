@@ -4,6 +4,8 @@ export MLFLOW_TRACKING_URI='https://user-pengfei-837304.kub.sspcloud.fr/'
 export MLFLOW_EXPERIMENT_NAME="pokemon"
 
 run_name="default"
+
+# don't forget to change me
 data_url="https://minio.lab.sspcloud.fr/pengfei/sspcloud-demo/pokemon-cleaned.csv"
 
 # set the hyper parameters
