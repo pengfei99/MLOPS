@@ -40,7 +40,7 @@ spec:
             - name: MLFLOW_MODEL_NAME
               value: pokemon
             - name: MLFLOW_MODEL_VERSION
-              value: "5"
+              value: "6"
           ports:
             - name: http
               containerPort: 8000
