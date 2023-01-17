@@ -179,3 +179,9 @@ For example, [mlflow](https://mlflow.org/) can be considered as a mlops platform
 
 - [MLOps project example](https://github.com/pengfei99/mlflow-pokemon-example.git) 
 - [Feature engineering/store](https://github.com/pengfei99/FeatureEngineering.git)
+
+## 6. Usefull tools
+
+- [NannyML](https://github.com/NannyML/nannyml) : Model monitoring tool
+- [Weights & Biases](https://github.com/wandb/wandb) : Model tracking framework (with better data viz compare to MLFlow)
+- [BentoML](https://github.com/bentoml/BentoML): ALL in one framework (from training, tracking and production). Similar to MLflow, worth to try and do a comparasion with MLFlow.
