@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Workflow
 metadata:
-  name: pokemon-model-training-workflow-v1
+  generateName: pokemon-model-training-workflow-
   labels:
     environment: production
     app: pokemon
